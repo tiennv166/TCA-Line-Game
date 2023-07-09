@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B36934C2A5B05B40077665A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 7B36934B2A5B05B40077665A /* ComposableArchitecture */; };
 		A158EF992A2DDFAA0013440E /* GameCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158EF982A2DDFAA0013440E /* GameCore.swift */; };
 		A158EF9B2A2EE22C0013440E /* BallColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158EF9A2A2EE22C0013440E /* BallColor+Extension.swift */; };
 		A158EF9F2A2F1A8C0013440E /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158EF9E2A2F1A8C0013440E /* ScoreView.swift */; };
@@ -15,7 +16,6 @@
 		A18A2E062A26EDA200512E71 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A2E052A26EDA200512E71 /* RootView.swift */; };
 		A18A2E082A26EDA400512E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A18A2E072A26EDA400512E71 /* Assets.xcassets */; };
 		A18A2E0C2A26EDA400512E71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A18A2E0B2A26EDA400512E71 /* Preview Assets.xcassets */; };
-		A18A2E142A26F12900512E71 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = A18A2E132A26F12900512E71 /* ComposableArchitecture */; };
 		A18A2E1F2A274AB700512E71 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A2E1E2A274AB700512E71 /* Ball.swift */; };
 		A18A2E222A274D7200512E71 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A2E212A274D7200512E71 /* Board.swift */; };
 		A18A2E282A27509800512E71 /* BallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A2E272A27509800512E71 /* BallNode.swift */; };
@@ -88,13 +88,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A18A2E142A26F12900512E71 /* ComposableArchitecture in Frameworks */,
+				7B36934C2A5B05B40077665A /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B36934A2A5B05B40077665A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A18A2DF72A26EDA200512E71 = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +114,7 @@
 				A18A2E232A274E8500512E71 /* Extensions */,
 				A18A2E502A2D7C0200512E71 /* SupportingFiles */,
 				A18A2E012A26EDA200512E71 /* Products */,
+				7B36934A2A5B05B40077665A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -282,7 +290,7 @@
 			);
 			name = Line;
 			packageProductDependencies = (
-				A18A2E132A26F12900512E71 /* ComposableArchitecture */,
+				7B36934B2A5B05B40077665A /* ComposableArchitecture */,
 			);
 			productName = Line;
 			productReference = A18A2E002A26EDA200512E71 /* Line.app */;
@@ -595,13 +603,13 @@
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = exactVersion;
-				version = 0.54.0;
+				version = 0.55.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A18A2E132A26F12900512E71 /* ComposableArchitecture */ = {
+		7B36934B2A5B05B40077665A /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A18A2E122A26F12900512E71 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;

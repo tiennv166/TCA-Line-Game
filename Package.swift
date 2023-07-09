@@ -11,7 +11,7 @@ let package = Package(
         .library(name: "Line", targets: ["Line"])
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.54.0"),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.55.0"),
     ],
     targets: [
         .target(
