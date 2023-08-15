@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import Foundation
 
-struct Settings: ReducerProtocol {
+struct Settings: Reducer {
     struct State: Equatable {
         var isSoundEnabled: Bool = false
         var isNextBallsHidden: Bool = false
@@ -22,16 +22,16 @@ struct Settings: ReducerProtocol {
         case didSave
     }
     
-    @Dependency(\.settingsClient) var settingsClient
+    @Dependency(\.settingsClient) private var settingsClient
             
-    func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .loadSettings:
-            return .task {
+            return .run { send in
                 var state = State()
                 state.isSoundEnabled = await settingsClient.isSoundEnabled()
                 state.isNextBallsHidden = await settingsClient.isNextBallsHidden()
-                return .didLoadSettings(state)
+                await send(.didLoadSettings(state))
             }
         case let .didLoadSettings(newState):
             state.isSoundEnabled = newState.isSoundEnabled
@@ -39,15 +39,15 @@ struct Settings: ReducerProtocol {
             return .none
         case .toggleSoundEnabaled:
             state.isSoundEnabled.toggle()
-            return .task { [state] in
+            return .run { [state] send in
                 await settingsClient.setSoundEnabled(state.isSoundEnabled)
-                return .didSave
+                await send(.didSave)
             }
         case .toggleNextBallsHidden:
             state.isNextBallsHidden.toggle()
-            return .task { [state] in
+            return .run { [state] send in
                 await settingsClient.setNextBallsHidden(state.isNextBallsHidden)
-                return .didSave
+                await send(.didSave)
             }
         case .didSave:
             return .none

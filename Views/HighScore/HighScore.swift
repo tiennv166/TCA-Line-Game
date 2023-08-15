@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import Foundation
 
-struct HighScore: ReducerProtocol {
+struct HighScore: Reducer {
     struct State: Equatable {
         var scores: [Score] = []
     }
@@ -19,21 +19,21 @@ struct HighScore: ReducerProtocol {
         case addScore(Score)
     }
     
-    @Dependency(\.highScoreManager) var highScoreManager
+    @Dependency(\.highScoreManager) private var highScoreManager
             
-    func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .loadHighScores:
-            return .task {
-                return .didLoadHighScores(await highScoreManager.getHighScores())
+            return .run { send in
+                await send(.didLoadHighScores(await highScoreManager.getHighScores()))
             }
         case let .didLoadHighScores(scores):
             state.scores = scores
             return .none
         case let .addScore(score):
-            return .task {
+            return .run { send in
                 await highScoreManager.addScore(score)
-                return .loadHighScores
+                await send(.loadHighScores)
             }
         }
     }

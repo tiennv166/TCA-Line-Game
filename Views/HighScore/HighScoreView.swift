@@ -19,7 +19,7 @@ struct HighScoreView: View {
     }
     
     var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             List(
                 viewStore.scores
                     .sorted { $0.score > $1.score }
@@ -40,7 +40,7 @@ struct HighScoreView: View {
                 }
             }
         }
-        .onAppear { ViewStore(store).send(.loadHighScores) }
+        .onAppear { ViewStore(store, observe: { $0 }).send(.loadHighScores) }
     }
 }
 

@@ -36,7 +36,7 @@ struct RootView: View {
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
                     .background(Color.black)
                     .opacity(0.8)
-                WithViewStore(store) { viewStore in
+                WithViewStore(store, observe: { $0 }) { viewStore in
                     HStack(spacing: 10) {
                         CustomButton(
                             action: { isHighScoresShowing.toggle() },
@@ -87,15 +87,15 @@ struct RootView: View {
                 SettingsView(
                     isPresented: $isSettingsShowing,
                     store: store.scope(state: \.settings, action: Root.Action.settings),
-                    newGameTrigger: { ViewStore(store).send(.game(.createNewGame)) }
+                    newGameTrigger: { ViewStore(store, observe: { $0 }).send(.game(.createNewGame)) }
                 )
                 .navigationBarItems(leading: Button("Close") { isSettingsShowing.toggle() })
                 .navigationBarTitle("Game Settings", displayMode: .inline)
             }
         }
         .onAppear {
-            ViewStore(store).send(.game(.loadGame))
-            ViewStore(store).send(.settings(.loadSettings))
+            ViewStore(store, observe: { $0 }).send(.game(.loadGame))
+            ViewStore(store, observe: { $0 }).send(.settings(.loadSettings))
         }
     }
 }

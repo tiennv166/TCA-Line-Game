@@ -8,7 +8,7 @@
 import ComposableArchitecture
 import Foundation
 
-struct Root: ReducerProtocol {
+struct Root: Reducer {
     struct State: Equatable {
         var settings = Settings.State()
         var game = Game.State()
@@ -21,7 +21,7 @@ struct Root: ReducerProtocol {
         case highScore(HighScore.Action)
     }
     
-    var body: some ReducerProtocol<State, Action> {
+    var body: some Reducer<State, Action> {
         Reduce { _, _ in .none }
         Scope(state: \.settings, action: /Action.settings) { Settings() }
         Scope(state: \.game, action: /Action.game) { Game() }

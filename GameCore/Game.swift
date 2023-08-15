@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct Game: ReducerProtocol, Sendable {
+struct Game: Reducer, Sendable {
     struct State: Equatable {
         var scoreBoard: GameStorable = GameStorable(score: 0, board: Board(balls: [], nextBalls: []))
         var targetPosition: GridPosition?
@@ -28,9 +28,9 @@ struct Game: ReducerProtocol, Sendable {
         case didSaveGame
     }
     
-    @Dependency(\.gameStorage) var gameStorage
+    @Dependency(\.gameStorage) private var gameStorage
             
-    func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case let .cellTapped(position):
             if let ball = state.board.ball(in: position) {
@@ -106,16 +106,16 @@ struct Game: ReducerProtocol, Sendable {
             state.undoStack = newState.undoStack
             return .send(.saveGame)
         case .loadGame:
-            return .task {
+            return .run { send in
                 if let game = await gameStorage.loadGame() {
-                    return .didLoadGame(game)
+                    await send(.didLoadGame(game))
                 }
-                return .createNewGame
+                await send(.createNewGame)
             }
         case .saveGame:
-            return .task { [game = state.scoreBoard] in
+            return .run { [game = state.scoreBoard] send in
                 await gameStorage.saveGame(game)
-                return .didSaveGame
+                await send(.didSaveGame)
             }
         case let .didLoadGame(game):
             state.scoreBoard = game
