@@ -15,7 +15,7 @@ struct SettingsView: View {
     let newGameTrigger: () -> Void
 
     var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(spacing: 12) {
                 SettingButton(
                     text: viewStore.isSoundEnabled ? "Off Sound" : "On Sound",

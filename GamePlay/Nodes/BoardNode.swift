@@ -29,8 +29,8 @@ final class BoardNode: SKSpriteNode {
     
     init(size: CGSize, store: StoreOf<Root>) {
         self.store = store
-        self.gameStore = ViewStore(store.scope(state: \.game, action: Root.Action.game))
-        self.settingsStore = ViewStore(store.scope(state: \.settings, action: Root.Action.settings))
+        self.gameStore = ViewStore(store.scope(state: \.game, action: Root.Action.game), observe: { $0 })
+        self.settingsStore = ViewStore(store.scope(state: \.settings, action: Root.Action.settings), observe: { $0 })
         let texture = SKTexture(imageNamed: "sceneBg")
         super.init(texture: texture, color: .clear, size: size)
         configure(size: size)

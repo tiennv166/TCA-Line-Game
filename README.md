@@ -10,7 +10,7 @@ Players can only move one ball at a time with a single touch. The ball will move
 
 # Implementation
 
-This game has been implemented with SwiftUI & SpriteKit, using TCA version [0.54.0](https://pointfreeco.github.io/swift-composable-architecture/0.54.0/documentation/composablearchitecture/).
+This game has been implemented with SwiftUI & SpriteKit, using TCA version [1.1.0](https://pointfreeco.github.io/swift-composable-architecture/1.1.0/documentation/composablearchitecture/).
 
 [`Game.swift`](GameCore/Game.swift)
 - [`State`](GameCore/Game.swift#L11)

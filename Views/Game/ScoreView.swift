@@ -25,7 +25,7 @@ struct ScoreView: View {
                             .stroke(Color.blue, lineWidth: 2)
                     )
                     .shadow(radius: 10)
-                WithViewStore(store) { viewStore in
+                WithViewStore(store, observe: { $0 }) { viewStore in
                     Text(String(format: "%06d", viewStore.score))
                         .font(
                             .system(size: 32)
